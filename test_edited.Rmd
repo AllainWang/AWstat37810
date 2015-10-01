@@ -13,10 +13,10 @@ When you click the **Knit** button a document will be generated tggghat includes
 summary(cars)
 ```
 
-You can also embed plots, for example:
+You can also embed plosts, for example:
 
 ```{r, echo=FALSE}
 plot(cars)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Note that the `echo = FALSE` parameter was added to the code chunk to prevesnt printing of the R code that generated the plot.
