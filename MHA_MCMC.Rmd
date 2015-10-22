@@ -1,0 +1,63 @@
+---
+title: "Assignment 3 Q6"
+author: "Zhongzhen Wang"
+date: "2015年10月21日"
+output: html_document
+---
+
+```{r}
+source('~/37810/AWstat37810/New_MHA_MCMC.R')
+compare_outcomes(1000)
+compare_outcomes(10000)
+compare_outcomes(100000)
+```
+
+```{r}
+chain <- run_metropolis_MCMC(runif(3,0,10),100000)
+plot(x,y, main="Test Data")
+
+
+plot (seq(3, 7, by=.05), slopelikelihoods , type="l", xlab = "values of slope parameter a", ylab = "Log likelihood")
+
+
+burnIn = 5000
+acceptance = 1-mean(duplicated(chain[-(1:burnIn),]))
+
+
+summary_plot <- function(plotnumber){
+  if(plotnumber == 1){
+    par(mfrow = c(2,3))
+    hist(chain[-(1:burnIn),1],nclass=30, , main="Posterior of a", xlab="True value = red line" )
+    abline(v = mean(chain[-(1:burnIn),1]))
+    abline(v = trueA, col="red" )}
+  if(plotnumber == 2){
+    hist(chain[-(1:burnIn),2],nclass=30, main="Posterior of b", xlab="True value = red line")
+    abline(v = mean(chain[-(1:burnIn),2]))
+    abline(v = trueB, col="red" )}
+  if(plotnumber == 3){
+    hist(chain[-(1:burnIn),3],nclass=30, main="Posterior of sd", xlab="True value = red line")
+    abline(v = mean(chain[-(1:burnIn),3]) )
+    abline(v = trueSd, col="red" )}
+  if(plotnumber == 4){
+    plot(chain[-(1:burnIn),1], type = "l", xlab="True value = red line" , main = "Chain values of a", )
+    abline(h = trueA, col="red" )}
+  if(plotnumber == 5){
+    plot(chain[-(1:burnIn),2], type = "l", xlab="True value = red line" , main = "Chain values of b", )
+    abline(h = trueB, col="red" )}
+  if(plotnumber == 6){
+    
+    plot(chain[-(1:burnIn),3], type = "l", xlab="True value = red line" , main = "Chain values of sd", )
+    abline(h = trueSd, col="red" )}
+}
+
+
+summary_plot(1)
+summary_plot(2)
+summary_plot(3)
+summary_plot(4)
+summary_plot(5)
+summary_plot(6)
+
+summary(lm(y~x))
+```
+
