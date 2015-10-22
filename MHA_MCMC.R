@@ -80,29 +80,36 @@ burnIn = 5000
 acceptance = 1-mean(duplicated(chain[-(1:burnIn),]))
 
 ### Summary: #######################
+summary_plot <- function(plotnumber){
 # Posterior estimate for slope(a)
+  if(plotnumber == 1){
 par(mfrow = c(2,3))
 hist(chain[-(1:burnIn),1],nclass=30, , main="Posterior of a", xlab="True value = red line" )
 abline(v = mean(chain[-(1:burnIn),1]))
-abline(v = trueA, col="red" )
+abline(v = trueA, col="red" )}
 # Posterior estimate for slope(b)
+  if(plotnumber == 2){
 hist(chain[-(1:burnIn),2],nclass=30, main="Posterior of b", xlab="True value = red line")
 abline(v = mean(chain[-(1:burnIn),2]))
-abline(v = trueB, col="red" )
+abline(v = trueB, col="red" )}
 # Posterior estimate for standard deviation of the error
+  if(plotnumber == 3){
 hist(chain[-(1:burnIn),3],nclass=30, main="Posterior of sd", xlab="True value = red line")
 abline(v = mean(chain[-(1:burnIn),3]) )
-abline(v = trueSd, col="red" )
+abline(v = trueSd, col="red" )}
+  if(plotnumber == 4){
 # Markov Chain of parameter value of (a)
 plot(chain[-(1:burnIn),1], type = "l", xlab="True value = red line" , main = "Chain values of a", )
-abline(h = trueA, col="red" )
+abline(h = trueA, col="red" )}
+  if(plotnumber == 5){
 # Markov Chain of parameter value of (b)
 plot(chain[-(1:burnIn),2], type = "l", xlab="True value = red line" , main = "Chain values of b", )
-abline(h = trueB, col="red" )
+abline(h = trueB, col="red" )}
+  if(plotnumber == 6){
 # Markov Chain of parameter value of standard deviation of the error
 plot(chain[-(1:burnIn),3], type = "l", xlab="True value = red line" , main = "Chain values of sd", )
-abline(h = trueSd, col="red" )
-
+abline(h = trueSd, col="red" )}
+}
 # for comparison:
 summary(lm(y~x))
 
